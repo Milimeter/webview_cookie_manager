@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final cookieManager = WebviewCookieManager();
 
-  final String _url = 'https://m.youtube.com';
+  final String _url = 'https://ebay.com';
   final String cookieValue = 'some-cookie-value';
   final String domain = 'm.youtube.com';
   final String cookieName = 'some_cookie_name';
@@ -42,6 +43,12 @@ class _MyAppState extends State<MyApp> {
           for (var item in gotCookies) {
             print(item);
           }
+          String cookieHeader = gotCookies
+              .map((cookie) => '${cookie.name}=${cookie.value}')
+              .join('; ');
+
+          // Now you can use `cookieHeader` in your API request
+          log('----New Captured Cookies: $cookieHeader');
         },
       ));
     cookieManager.setCookies([
